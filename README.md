@@ -2,7 +2,7 @@ This is the first repository of Myungsu Chae.
 
 I'm a newbie in GitHub, so there can be something strange or misused/unused contents. 
 
-The repository will be updated for better understanding as an open source ASAP.
+The repository will be updated for better understanding ASAP.
 
 This work is implemented by Myungsu Chae and Sungkwan Jung.
 
