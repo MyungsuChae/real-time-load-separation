@@ -1,6 +1,12 @@
+# Install / Load packages
+install.packages("randomForest")
+library("randomForest")
+install.packages("e1071")
+library("e1071")
+
 
 # 시작 위치를 지정
-TOP_DIR = "C:/Users/KI_CMS/Dropbox/Private/KI_ITC/2016 기관고유사업(정성관)/NILM_skjung_new"
+TOP_DIR = "C:/Users/yourDirectory"
 
 ###### 
 ## Under the TOP_DIR,
@@ -18,7 +24,7 @@ FEATURE_SEL_ON = TRUE
 ML_MODEL_RF = TRUE
 ML_MODEL_SVM = FALSE
 
-# Logarithm의 이용 여부
+# Log Normalization의 이용 여부
 LOGARITHM_ON = TRUE
 
 # 위상정보 이용 여부
