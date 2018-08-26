@@ -5,7 +5,7 @@ install.packages("e1071")
 library("e1071")
 
 
-# 시작 위치를 지정
+# working directory
 TOP_DIR = "C:/Users/yourDirectory"
 
 ###### 
@@ -24,18 +24,18 @@ FEATURE_SEL_ON = TRUE
 ML_MODEL_RF = TRUE
 ML_MODEL_SVM = FALSE
 
-# Log Normalization의 이용 여부
+# Log Normalization
 LOGARITHM_ON = TRUE
 
-# 위상정보 이용 여부
+# Phase Information
 USE_PHASE_INFO = TRUE
 if ( LOGARITHM_ON == TRUE ) {
   USE_PHASE_INFO = FALSE
 }
 
-# 스냅샷의 평균 이용 여부
+# Snapshot
 TIME_AVERAGE_ON = TRUE
-# 스냅샷 평균 길이
+# Avg size of Snapshot
 TAVERAGELENGTH = 9
 
 setwd("./rawData/train")
@@ -69,7 +69,7 @@ for (caseDirName in caseDirList) {
   write.csv(dataset, file = paste0("../../aggregatedData/",caseName,".csv") )
 }
 
-# 입력 snapshot들을 주파수 영역에서 특성을 파악 (column 1을 제외해서 DC성분을 제거)
+# remove DC component by eliminateing column 1
 trainFFTDataSet <- Mod( t( mvfft(t(trainRawDataSet))) )[,2:(length(trainRawDataSet[1,])/2)]
 #phaseData <- Arg( t( mvfft(t(trainRawDataSet))) ) /pi * 180
 if( USE_PHASE_INFO == TRUE ) {
@@ -102,7 +102,7 @@ write.csv(trainSet, file = "../TrainSet.csv" )
 table <- read.csv(file = "../TrainSet.csv", header = T)
 trainSet <- table[,2:dim(table)[2]]
 
-# 각 경우에 대한 average 값 계산
+# Compute the value of Avg.
 # find unique labels,
 # then, gather the row indexes of each label
 # 'colMeans' of those row
@@ -240,7 +240,7 @@ write.csv(testSet, file = "../TestSet.csv" )
 table <- read.csv(file = "../TestSet.csv", header = T)
 testSet <- table[,2:dim(table)[2]]
 
-# 각 경우에 대한 average 값 계산
+# Compute the value of Avg.
 # find unique labels,
 # then, gather the row indexes of each label
 # 'colMeans' of those row
@@ -322,7 +322,7 @@ if( ML_MODEL_RF == TRUE ) {
   
   
   
-  # 각 경우에 대한 average 값 계산
+  # Compute the value of Avg.
   # find unique labels,
   # then, gather the row indexes of each label
   # 'colMeans' of those row
@@ -359,18 +359,3 @@ if( ML_MODEL_RF == TRUE ) {
 #for(i in 2:dim(predictedResult)[2]) {
 #	lines(1:dim(predictedResult)[1],predictedResult[,i], col=i)
 #}
-
-
-
-
-
-
-#newCase <- readline()
-
-#testInput[1,-512] - averageDataLabel[1,-512]
-
-### ToDo:
-## Main Component (highest probability expectation)을 제거한 상황에서 expectation을 계산한 결과는 어떨까?
-## 
-# colSums(predictedResult)
-# colMeans
